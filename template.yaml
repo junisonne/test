@@ -1,0 +1,80 @@
+name: hello-vm
+display_name: "Hello World VM"
+description: "Simple Ubuntu VM for testing basic deployments and learning Terraform"
+version: "1.0.0"
+category: compute
+
+# Git repository info (optional)
+git_repo: "https://github.com/your-org/appstore-templates"
+git_path: "hello-vm"
+
+# Icon/logo
+icon: icon.png
+
+# Terraform configuration
+terraform:
+  working_dir: terraform/
+  required_version: ">= 1.0"
+
+# User-configurable parameters
+parameters:
+  - name: vm_name
+    type: string
+    description: "Name of the virtual machine"
+    default: "hello-vm"
+    required: true
+    
+  - name: cpu_cores
+    type: number
+    description: "Number of CPU cores"
+    default: 1
+    min: 1
+    max: 8
+    required: true
+    
+  - name: ram_mb
+    type: number
+    description: "Amount of RAM in MB"
+    default: 2048
+    min: 512
+    max: 16384
+    step: 512
+    required: true
+    help: "Common values: 512 (0.5GB), 1024 (1GB), 2048 (2GB), 4096 (4GB), 8192 (8GB)"
+    
+  - name: enable_floating_ip
+    type: boolean
+    description: "Assign a public floating IP"
+    default: true
+    required: false
+
+# Expected Terraform outputs
+outputs:
+  - name: instance_ip
+    description: "Internal IP address of the VM"
+    display: true
+    
+  - name: floating_ip
+    description: "Public floating IP (if enabled)"
+    display: true
+    
+  - name: ssh_command
+    description: "SSH command to connect"
+    display: true
+
+# Resource information
+estimated_cost: "~0.01€/hour"
+estimated_deployment_time: "3-5 minutes"
+
+# Access control
+requires_approval: false
+allowed_roles: ["student", "teacher", "admin"]
+
+# Additional metadata
+tags:
+  - beginner
+  - linux
+  - compute
+  
+author: "AppStore Team"
+documentation_url: "https://docs.appstore.edu/templates/hello-vm"
