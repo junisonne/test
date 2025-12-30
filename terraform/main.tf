@@ -26,7 +26,7 @@ provider "openstack" {
 # --- DATA SOURCES & RESOURCES ---
 
 # 1. Flavor (Hardware-Größe) automatisch finden
-data "openstack_compute_flavor_v2" "selected" {
+data "openstack_compute_flavor_v2" "small" {
   vcpus = var.cpu_cores
   ram   = var.ram_mb
   # Wählt den kleinsten passenden Flavor
