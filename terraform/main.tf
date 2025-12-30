@@ -19,11 +19,27 @@ provider "openstack" {
 # --- DATA SOURCES & RESOURCES ---
 
 # 1. Flavor (Hardware-Größe) automatisch finden
-data "openstack_compute_flavor_v2" "selected" {
-  vcpus    = var.cpu_cores
-  min_ram  = var.ram_mb
-  min_disk = 10
+#data "openstack_compute_flavor_v2" "selected" {
+#  vcpus    = var.cpu_cores
+ # min_ram  = var.ram_mb
+  #min_disk = 10
+#}
+
+locals {
+  largest_flavor = max(data.openstack_compute_flavors_v2.all_m1_flavors.flavors.*.ram)
 }
+data "openstack_compute_flavors_v2" "selected" {
+  # Filter for the one matching the max RAM found
+  filter {
+    name = "ram"
+    value = local.largest_flavor
+  }
+  filter {
+    name = "name"
+    value = "m1"
+  }
+}
+
 
 # 2. Security Group für SSH
 resource "openstack_networking_secgroup_v2" "ssh_access" {
