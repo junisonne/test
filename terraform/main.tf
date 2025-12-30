@@ -20,9 +20,9 @@ provider "openstack" {
 
 # 1. Flavor (Hardware-Größe) automatisch finden
 data "openstack_compute_flavor_v2" "selected" {
-  vcpus = var.cpu_cores
-  ram   = var.ram_mb
-  # Wählt den kleinsten passenden Flavor
+  vcpus    = var.cpu_cores
+  min_ram  = var.ram_mb
+  min_disk = 10
 }
 
 # 2. Security Group für SSH
