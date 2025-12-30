@@ -46,7 +46,7 @@ resource "openstack_networking_secgroup_rule_v2" "ssh_ingress" {
 resource "openstack_compute_keypair_v2" "ssh_key" {
   # ÄNDERUNG: Workspace im Namen, damit Keys nicht kollidieren
   name       = "${var.key_pair_name}-${terraform.workspace}"
-  public_key = file("~/.ssh/student-key.pub")
+  public_key = file("./student-key.pub")
 }
 
 # 4. Die VM Instanz
