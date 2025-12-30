@@ -6,13 +6,6 @@ terraform {
       version = "~> 1.53.0"
     }
   }
-  # NEU: PostgreSQL Backend Konfiguration
-  backend "pg" {
-    # Verbindung zur lokalen Datenbank (via Port Forwarding von Docker)
-    # Format: postgres://user:password@host:port/dbname
-    conn_str    = "postgres://appuser:apppassword@localhost:5432/appstore?sslmode=disable"
-    schema_name = "terraform_remote_state"
-  }
 }
 
 
